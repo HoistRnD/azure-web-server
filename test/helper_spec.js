@@ -9,7 +9,7 @@ q.longStackSupport = true;
 before(function (done) {
   this.timeout(5000);
   var err;
-  if (!(process.env.AZURE_ACCOUNT && process.env.AZURE_KEY)) {
+  if (process.env.AZURE_ACCOUNT==='undefined'||process.env.AZURE_KEY==='undefined') {
     console.error('Tests require environment varaibles for AZURE_ACCOUNT and AZURE_KEY for a test blob storage account');
     err = new Error('Tests require environment varaibles for AZURE_ACCOUNT and AZURE_KEY for a test blob storage account');
   }

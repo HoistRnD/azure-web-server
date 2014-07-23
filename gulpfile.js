@@ -24,9 +24,10 @@ function runJSHint(source) {
 }
 
 gulp.task('watch', function () {
-  process.env.AZURE_ACCOUNT = process.env.AZURE_ACCOUNT || require('yargs').argv.azureAccount;
-  process.env.AZURE_KEY = process.env.AZURE_KEY || require('yargs').argv.azureKey;
-  if(!(process.env.AZURE_ACCOUNT&&process.env.AZURE_KEY))
+  var args = require('yargs').argv;
+  process.env.AZURE_ACCOUNT = process.env.AZURE_ACCOUNT || args.azureAccount;
+  process.env.AZURE_KEY = process.env.AZURE_KEY || args.azureKey;
+  if(process.env.AZURE_ACCOUNT==='undefined'||process.env.AZURE_KEY==='undefined')
   {
     throw new Error('Usage: gulp --azureAccount=<azureaccount> --azureKey=<azurekey>');
   }
@@ -45,9 +46,10 @@ gulp.task('watch', function () {
   });
 });
 gulp.task('test-mocha',function(){
-  process.env.AZURE_ACCOUNT = process.env.AZURE_ACCOUNT || require('yargs').argv.azureAccount;
-  process.env.AZURE_KEY = process.env.AZURE_KEY || require('yargs').argv.azureKey;
-  if(!(process.env.AZURE_ACCOUNT&&process.env.AZURE_KEY))
+  var args = require('yargs').argv;
+  process.env.AZURE_ACCOUNT = process.env.AZURE_ACCOUNT || args.azureAccount;
+  process.env.AZURE_KEY = process.env.AZURE_KEY || args.azureKey;
+  if(process.env.AZURE_ACCOUNT==='undefined'||process.env.AZURE_KEY==='undefined')
   {
     throw new Error('Usage: gulp --azureAccount=<azureaccount> --azureKey=<azurekey>');
   }
