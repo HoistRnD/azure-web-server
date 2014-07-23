@@ -3,7 +3,6 @@ var grep = require('gulp-grep-stream');
 var mocha = require('gulp-mocha');
 var watch = require('gulp-watch');
 var gulp = require('gulp');
-var debug = require('gulp-debug');
 var filter = require('gulp-filter');
 var jshint = require('gulp-jshint');
 
