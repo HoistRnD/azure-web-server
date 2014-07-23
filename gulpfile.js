@@ -7,7 +7,11 @@ var filter = require('gulp-filter');
 var jshint = require('gulp-jshint');
 
 function runMocha(source) {
-  return source.pipe(grep('**/test/**/*.js'))
+  return source
+    .pipe(grep('**/test/**/*.js'))
+    /* jshint camelcase:false */
+    .pipe(grep('**/test/fixtures/**/*.js',{invert_match:true}))
+    /* jshint camelcase:true */
     .pipe(mocha());
 }
 
