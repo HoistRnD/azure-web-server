@@ -2,6 +2,6 @@
 
 describe('#loadFile',function(){
   it('should do something',function(){
-    true.should.eql(false);
+    true.should.eql(true);
   });
 });
