@@ -1,68 +1,27 @@
-'use strict';
+var grep = require('gulp-grep-stream');
+var mocha = require('gulp-mocha');
+var plumber = require('gulp-plumber');
+var watch = require('gulp-watch');
 var gulp = require('gulp');
-//var debug = require('gulp-debug');
-var jshint = require('gulp-jshint');
-var shell = require('gulp-shell');
+var debug = require('gulp-debug');
 
-
-//var changed = require('gulp-changed');
-var mocha = require('gulp-spawn-mocha');
-
-var paths = {
-  tests: ['tests/**/*_spec.js'],
-  app: ['app.js', 'lib/**/*.js']
-};
-
-
-gulp.on('err', function (err) {
-  console.log(err);
-});
-
-gulp.task('jshint:app', function () {
-  gulp.src(paths.app)
-  //.pipe(changed)
-  .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'));
-});
-gulp.task('jshint:tests', function () {
-  gulp.src(paths.tests)
-  //.pipe(changed)
-  .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'));
-});
-
-function test() {
-  return gulp.src(paths.tests, {
-      read: false
-    })
-    .pipe(mocha({
-      bin: 'node_modules/.bin/mocha',
-      reporter: 'spec',
-      colors: true,
-      require: 'test/testSetup.js',
-      growl: true
-    }))
-    .on('error', console.warn.bind(console));
+function runMocha(source) {
+  return source.pipe(grep('**/test/**/*.js'))
+    .pipe(mocha());
 }
 
-gulp.task('test:no_fail', ['jshint'], function () {
-  test();
-});
-
-gulp.task('test', ['jshint'], function () {
-  test().on('error', function (err) {
-    throw err;
+gulp.task('watch', function () {
+  watch({
+    glob: ['lib/**/*.js', 'test/**/*.js'],
+    emit: 'all'
+  }, function (files) {
+    runMocha(files).on('error', function (err) {
+      if (!/tests? failed/.test(err.stack)) {
+        console.log(err.stack);
+      }
+    });
   });
 });
-
-gulp.task('watch', function () {
-  gulp.watch(paths.app, ['jshint:app', 'test:no_fail']);
-  gulp.watch(paths.tests, ['jshint:tests', 'test:no_fail']);
-});
-
-gulp.task('package', shell.task([
-  'docker build -t hoist/executor .'
-]));
-
-gulp.task('jshint', ['jshint:app', 'jshint:tests']);
-gulp.task('default', ['test:no_fail', 'watch']);
+gulp.task('test', function () {
+  runMocha(gulp.src('test/**/*.js'));
+})
