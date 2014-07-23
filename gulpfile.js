@@ -9,8 +9,8 @@ var shell = require('gulp-shell');
 var mocha = require('gulp-spawn-mocha');
 
 var paths = {
-  tests: ['test/unit_tests/*.js'],
-  app: ['start.js', 'lib/**/*.js']
+  tests: ['tests/**/*_spec.js'],
+  app: ['app.js', 'lib/**/*.js']
 };
 
 

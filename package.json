@@ -15,5 +15,14 @@
   "bugs": {
     "url": "https://github.com/hoist/azure-web-server/issues"
   },
-  "homepage": "https://github.com/hoist/azure-web-server"
+  "homepage": "https://github.com/hoist/azure-web-server",
+  "devDependencies": {
+    "gulp": "^3.8.6",
+    "gulp-jshint": "^1.7.1",
+    "gulp-shell": "^0.2.8",
+    "gulp-spawn-mocha": "^0.1.7-beta.3",
+    "gulp-watch": "^0.6.8",
+    "jshint-stylish": "^0.4.0",
+    "mocha": "^1.20.1"
+  }
 }
