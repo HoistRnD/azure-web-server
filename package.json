@@ -1,0 +1,19 @@
+{
+  "name": "azure-web-server",
+  "version": "0.0.0",
+  "description": "A web server that pulls files from azure storage",
+  "main": "app.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/hoist/azure-web-server"
+  },
+  "author": "Hoist Apps Ltd",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hoist/azure-web-server/issues"
+  },
+  "homepage": "https://github.com/hoist/azure-web-server"
+}
