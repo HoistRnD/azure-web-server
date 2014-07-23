@@ -15,7 +15,7 @@ function isModified(file) {
   if (file.event) {
     console.log(file.event);
   }
-  return file.event === 'changed';
+  return file.event === 'changed' || file.event === 'added';
 }
 
 function runJSHint(source) {
@@ -24,6 +24,12 @@ function runJSHint(source) {
 }
 
 gulp.task('watch', function () {
+  process.env.AZURE_ACCOUNT = process.env.AZURE_ACCOUNT || require('yargs').argv.azureAccount;
+  process.env.AZURE_KEY = process.env.AZURE_KEY || require('yargs').argv.azureKey;
+  if(!(process.env.AZURE_ACCOUNT&&process.env.AZURE_KEY))
+  {
+    throw new Error('Usage: gulp --azureAccount=<azureaccount> --azureKey=<azurekey>');
+  }
   runJSHint(gulp.src(['lib/**/*.js', 'test/**/*.js', '*.js']));
   watch({
     glob: ['lib/**/*.js', 'test/**/*.js','*.js'],
@@ -39,6 +45,12 @@ gulp.task('watch', function () {
   });
 });
 gulp.task('test-mocha',function(){
+  process.env.AZURE_ACCOUNT = process.env.AZURE_ACCOUNT || require('yargs').argv.azureAccount;
+  process.env.AZURE_KEY = process.env.AZURE_KEY || require('yargs').argv.azureKey;
+  if(!(process.env.AZURE_ACCOUNT&&process.env.AZURE_KEY))
+  {
+    throw new Error('Usage: gulp --azureAccount=<azureaccount> --azureKey=<azurekey>');
+  }
   return runMocha(gulp.src('test/**/*.js'));
 });
 gulp.task('test-jshint',function(){

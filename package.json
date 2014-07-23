@@ -19,6 +19,7 @@
   "devDependencies": {
     "chai": "^1.9.1",
     "chai-as-promised": "^4.1.1",
+    "glob": "^4.0.4",
     "gulp": "^3.8.6",
     "gulp-debug": "^0.3.0",
     "gulp-filter": "^0.5.0",
@@ -30,6 +31,12 @@
     "gulp-spawn-mocha": "^0.1.7-beta.3",
     "gulp-watch": "^0.6.8",
     "jshint-stylish": "^0.4.0",
-    "mocha": "^1.20.1"
+    "lodash": "^2.4.1",
+    "mocha": "^1.20.1",
+    "q": "^1.0.1",
+    "yargs": "^1.2.6"
+  },
+  "dependencies": {
+    "azure": "^0.9.12"
   }
 }
